@@ -18,7 +18,8 @@ public enum RespBeanEnum {
     // 登录模块5002XX
     SESSION_ERROR(500210,"session不存在或已失效"),
     LOGIN_ERROR(500211,"用户名或密码错误"),
-    MOBILE_ERROR(500212,"手机号码格式错误");
+    MOBILE_ERROR(500212,"手机号码格式错误"),
+    BINDING_ERROR(500213, "绑定参数格式错误");
 
     private final Integer code;
     private final String message;

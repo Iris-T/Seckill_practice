@@ -1,0 +1,41 @@
+package cn.iris.seckill.controller;
+
+import cn.iris.seckill.service.IUserService;
+import cn.iris.seckill.vo.LoginVO;
+import cn.iris.seckill.vo.RespBean;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
+/**
+ * 登录接口
+ * @author Iris 2022/4/19
+ */
+@Controller
+@RequestMapping("/login")
+@Slf4j
+public class LoginController {
+    @Autowired
+    private IUserService userService;
+
+    /**
+     * 跳转至登录页面
+     */
+    @RequestMapping("/toLogin")
+    public String toLogin() {
+        return "login";
+    }
+
+    @RequestMapping("/doLogin")
+    @ResponseBody
+    public RespBean doLogin(@Valid LoginVO loginVO, HttpServletRequest req, HttpServletResponse resp) {
+        log.info("尝试登录信息：{}", loginVO);
+        return userService.doLogin(loginVO, req, resp);
+    }
+}

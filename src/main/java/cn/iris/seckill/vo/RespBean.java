@@ -1,6 +1,5 @@
-package cn.iris.seckill.pojo;
+package cn.iris.seckill.vo;
 
-import cn.iris.seckill.vo.RespBeanEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
