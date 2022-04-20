@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
  * @since 2022-04-19
  */
 @Controller
-@RequestMapping("/seckill-goods")
+@RequestMapping("/seckillGoods")
 public class SeckillGoodsController {
 
 }

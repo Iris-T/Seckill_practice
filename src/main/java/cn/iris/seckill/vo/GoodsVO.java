@@ -3,15 +3,22 @@ package cn.iris.seckill.vo;
 import cn.iris.seckill.pojo.Goods;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
  * 商品返回对象
- *
  * @author: Iris
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @ApiModel("商品返回对象")
 public class GoodsVO extends Goods {
 
@@ -38,36 +45,5 @@ public class GoodsVO extends Goods {
      **/
     @ApiModelProperty("结束时间")
     private Date endDate;
-
-    public BigDecimal getSeckillPrice() {
-        return seckillPrice;
-    }
-
-    public void setSeckillPrice(BigDecimal seckillPrice) {
-        this.seckillPrice = seckillPrice;
-    }
-
-    public Integer getStockCount() {
-        return stockCount;
-    }
-
-    public void setStockCount(Integer stockCount) {
-        this.stockCount = stockCount;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
 }
+

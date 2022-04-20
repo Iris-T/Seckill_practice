@@ -2,6 +2,8 @@ package cn.iris.seckill.controller;
 
 
 import cn.iris.seckill.pojo.User;
+import cn.iris.seckill.service.IGoodsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -22,6 +24,8 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/goods")
 public class GoodsController {
+    @Autowired
+    private IGoodsService goodsService;
 
     @RequestMapping("/toList")
     public String toList(HttpSession session, Model model, @CookieValue("UserLoginTicket") String ticket) {
@@ -33,6 +37,7 @@ public class GoodsController {
             return "login";
         }
         model.addAttribute("user", user);
+        model.addAttribute("goodsList", goodsService.findGoodsVO());
         return "goodsList";
     }
 }

@@ -3,8 +3,12 @@ package cn.iris.seckill.service.impl;
 import cn.iris.seckill.pojo.Goods;
 import cn.iris.seckill.mapper.GoodsMapper;
 import cn.iris.seckill.service.IGoodsService;
+import cn.iris.seckill.vo.GoodsVO;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,5 +20,15 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements IGoodsService {
+    @Autowired
+    private GoodsMapper goodsMapper;
 
+    /**
+     * 获取商品列表信息
+     * @return List-GoodsVO
+     */
+    @Override
+    public List<GoodsVO> findGoodsVO() {
+        return goodsMapper.findGoodsVO();
+    }
 }
