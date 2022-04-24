@@ -13,9 +13,7 @@ import static java.lang.annotation.ElementType.*;
  * 验证手机号
  * @author: Iris
  */
-@Target({
-        METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE
-})
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Constraint(validatedBy = {IsMobileValidator.class})

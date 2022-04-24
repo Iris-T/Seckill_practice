@@ -12,7 +12,9 @@ import cn.iris.seckill.vo.RespBean;
 import cn.iris.seckill.vo.RespBeanEnum;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +32,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
 
     /**
      * 用户登录
@@ -43,13 +47,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public RespBean doLogin(LoginVO loginVO, HttpServletRequest req, HttpServletResponse resp) {
         String mobile = loginVO.getMobile();
         String password = loginVO.getPassword();
-        // 自定义参数校验则不需要校验代码
-//        if (ObjectUtils.isEmpty(mobile) || ObjectUtils.isEmpty(password)) {
-//            return RespBean.error(RespBeanEnum.LOGIN_ERROR);
-//        }
-//        if (!ValidatorUtil.isMobile(mobile)) {
-//            return RespBean.error(RespBeanEnum.MOBILE_ERROR);
-//        }
         // 获取用户信息
         User user = userMapper.selectById(mobile);
         if (null == user) {
@@ -61,8 +58,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
         // 生成Cookie
         String ticket = UUIDUtil.uuid();
-        req.getSession().setAttribute(ticket, user);
+        // 将用户信息存入Redis
+        redisTemplate.opsForValue().set("user:"+ticket, user);
         CookieUtil.setCookie(req, resp, "UserLoginTicket", ticket);
         return RespBean.success();
+    }
+
+    @Override
+    public User getUserByCookie(String userTicket, HttpServletRequest req, HttpServletResponse resp) {
+        if (ObjectUtils.isEmpty(userTicket)) {
+            return null;
+        }
+        User user = (User) redisTemplate.opsForValue().get("user:" + userTicket);
+        if (null != user) {
+            CookieUtil.setCookie(req, resp, "UserLoginTicket", userTicket);
+        }
+        return user;
     }
 }

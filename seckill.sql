@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 19/04/2022 11:23:53
+ Date: 20/04/2022 21:51:26
 */
 
 SET NAMES utf8mb4;
@@ -33,6 +33,31 @@ CREATE TABLE `t_goods`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of t_goods
+-- ----------------------------
+INSERT INTO `t_goods` VALUES (1, 'iPhone12', 'iPhone12 64GB', '/img/iphone12.png', 'iPhone12 64GB超大内存', 6299.00, 100);
+INSERT INTO `t_goods` VALUES (2, 'iPhone12 Pro', 'iPhone12 Pro 128GB', '/img/iphone12pro.png', 'iPhone12Pro 128GB尽享尊华', 9299.00, 100);
+
+-- ----------------------------
+-- Table structure for t_order
+-- ----------------------------
+DROP TABLE IF EXISTS `t_order`;
+CREATE TABLE `t_order`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '订单ID',
+  `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
+  `goods_id` bigint(20) DEFAULT NULL COMMENT '商品ID',
+  `delivery_addr_id` bigint(20) DEFAULT NULL COMMENT '收获地址ID',
+  `goods_name` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '商品名字',
+  `goods_count` int(20) DEFAULT 0 COMMENT '商品数量',
+  `goods_price` decimal(10, 2) DEFAULT 0.00 COMMENT '商品价格',
+  `order_channel` tinyint(4) DEFAULT 0 COMMENT '1 pc,2 android, 3 ios',
+  `status` tinyint(4) DEFAULT 0 COMMENT '订单状态，0新建未支付，1已支付，2已发货，3已收货，4已退货，5已完成',
+  `create_date` datetime(0) DEFAULT NULL COMMENT '订单创建时间',
+  `pay_date` datetime(0) DEFAULT NULL COMMENT '支付时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for t_seckill_goods
 -- ----------------------------
 DROP TABLE IF EXISTS `t_seckill_goods`;
@@ -47,6 +72,12 @@ CREATE TABLE `t_seckill_goods`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of t_seckill_goods
+-- ----------------------------
+INSERT INTO `t_seckill_goods` VALUES (1, 1, 3779.40, 10, '2022-04-20 10:00:00', '2022-04-25 10:00:00');
+INSERT INTO `t_seckill_goods` VALUES (2, 2, 8888.88, 10, '2022-04-20 10:00:00', '2022-04-30 20:00:00');
+
+-- ----------------------------
 -- Table structure for t_seckill_order
 -- ----------------------------
 DROP TABLE IF EXISTS `t_seckill_order`;
@@ -56,7 +87,7 @@ CREATE TABLE `t_seckill_order`  (
   `order_id` bigint(20) NOT NULL COMMENT '订单ID',
   `goods_id` bigint(20) NOT NULL COMMENT '商品ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for t_user
@@ -73,5 +104,10 @@ CREATE TABLE `t_user`  (
   `login_count` int(11) DEFAULT 0 COMMENT '登录次数',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of t_user
+-- ----------------------------
+INSERT INTO `t_user` VALUES (15882043063, 'Iris', 'd4f2259ca1ded04dcbb423cebe2f5ded', 'foxiris', NULL, NULL, NULL, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;

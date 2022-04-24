@@ -33,6 +33,19 @@ spring:
       # 连接测试语句
       connection-test-query: SELECT 1
 
+  redis:
+    timeout: 10000ms
+    host: 192.168.47.100
+    port: 6379
+    database: 3
+    password: foxiris@qq.com
+    lettuce:
+      pool:
+        max-active: 1024
+        max-wait: 10000ms
+        max-idle: 200
+        min-idle: 5
+
 mybatis-plus:
   # Mapper映射文件
   mapper-locations: classpath*:/mapper/*Mapper.xml

@@ -22,14 +22,14 @@ public class IsMobileValidator implements ConstraintValidator<IsMobile, String> 
     }
 
     @Override
-    public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(String val, ConstraintValidatorContext constraintValidatorContext) {
         if (required) {
-            return ValidatorUtil.isMobile(s);
+            return ValidatorUtil.isMobile(val);
         } else {
-            if (ObjectUtils.isEmpty(s)) {
+            if (ObjectUtils.isEmpty(val)) {
                 return true;
             } else {
-                return ValidatorUtil.isMobile(s);
+                return ValidatorUtil.isMobile(val);
             }
         }
     }
