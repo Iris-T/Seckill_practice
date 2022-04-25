@@ -4,6 +4,7 @@ import cn.iris.seckill.pojo.Goods;
 import cn.iris.seckill.vo.GoodsVO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -23,4 +24,11 @@ public interface GoodsMapper extends BaseMapper<Goods> {
      * @return
      */
     List<GoodsVO> findGoodsVO();
+
+    /**
+     * 通过商品ID获取商品详情信息
+     * @param goodId
+     * @return
+     */
+    GoodsVO findGoodsVOByGoodsId(@Param("goodId") long goodId);
 }

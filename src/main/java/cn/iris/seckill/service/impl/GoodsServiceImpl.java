@@ -31,4 +31,14 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     public List<GoodsVO> findGoodsVO() {
         return goodsMapper.findGoodsVO();
     }
+
+    /**
+     * 通过商品ID获取商品详情信息
+     * @param goodId 商品ID
+     * @return 商品详情信息
+     */
+    @Override
+    public GoodsVO findGoodsVOByGoodsId(long goodId) {
+        return goodsMapper.findGoodsVOByGoodsId(goodId);
+    }
 }
