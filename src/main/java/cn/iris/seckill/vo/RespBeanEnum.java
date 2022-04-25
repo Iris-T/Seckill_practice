@@ -19,7 +19,12 @@ public enum RespBeanEnum {
     SESSION_ERROR(500210,"session不存在或已失效"),
     LOGIN_ERROR(500211,"用户名或密码错误"),
     MOBILE_ERROR(500212,"手机号码格式错误"),
-    BINDING_ERROR(500213, "绑定参数格式错误");
+    BINDING_ERROR(500213, "绑定参数格式错误"),
+    // 秒杀模块5005XX
+    BUY_TIME_ERROR(500999, "抢购数据异常"),
+    EMPTY_STOCK(500500, "库存已空"),
+    REPEAT_ERROR(500510, "重复抢购,每人限购1件"),
+    ;
 
     private final Integer code;
     private final String message;
